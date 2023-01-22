@@ -1,0 +1,1 @@
+export const selectorLikedVideo = ( state:any ) => state.LikedVideoSlice.likedVideos   
