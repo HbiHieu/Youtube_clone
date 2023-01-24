@@ -36,7 +36,7 @@ const Videos = ({videos , style , isSearchPage } :IVideosProps) => {
       marginTop :'20px' ,
     }} 
     >
-     {  loadingVideos ? <SkeletonBox isSearchPage={isSearchPage}/> :
+     {  loadingVideos ? <SkeletonBox style={style}/> :
         videos?.map( (item,index) =>  (   
             <Grid 
             item 

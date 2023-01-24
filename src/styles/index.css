@@ -73,7 +73,6 @@ input:focus{
 }
 
 .formatStringDescription {
-  background-color: #f2f2f2;
   font-size: 15px;
   padding: 16px;
   border-radius: 16px;
@@ -96,5 +95,21 @@ input:focus{
 
 .menuComment {
   padding: 0 12px 0 16px;
+}
+
+.scale {
+  animation: scale 1.5s infinite ;
+}
+
+@keyframes scale {
+  0% {
+   scale: 1;
+  } 
+  50% {
+   scale: 1.1;
+  }
+  100% {
+    scale: 1; 
+  }
 }
 

@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState , useContext } from 'react'
 import { historyCreateVideo } from '../../utils/historyCreate'
 import { convertNumber } from '../../utils/convertNumber'
-import { Button } from '@mui/material'
+import { AppContext } from '../../context/AppProvider'
 import DetailVideoButton from '../Button/DetailVideoButton'
 
 interface IDescriptionVideoProps {
@@ -13,7 +13,8 @@ interface IDescriptionVideoProps {
 const DescriptionVideo = ( {description , createAt , viewCount } : IDescriptionVideoProps ) => {
   
   const [ isShowMore , setIsShowMore ] = useState<boolean>(false) ;
-
+  const { darkTheme } = useContext(AppContext)
+ 
   const handleShowMoreDescription = () => {
     if ( isShowMore ) {
       setIsShowMore(false) ;
@@ -32,6 +33,7 @@ const DescriptionVideo = ( {description , createAt , viewCount } : IDescriptionV
       height: isShowMore ? 'auto' : '104px' ,
       overflow:'hidden',
       position:'relative' ,
+      backgroundColor : darkTheme ? '#272727' : 'f2f2f2' ,
     }}
     >
       <div style={{fontWeight:'500'}}>

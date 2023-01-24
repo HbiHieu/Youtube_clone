@@ -2,11 +2,11 @@ import React , { useState , useRef , useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
-import { Button } from '@mui/material';
+import { Button ,Dialog , Box, Typography, Avatar } from '@mui/material';
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 
 import { AppContext } from '../context/AppProvider';
-import axios from 'axios';
+import { handleActiveSpeechRecogition } from '../utils/activeVoice';
 
 interface ISearchInputProps {
   isDarkTheme : boolean ,
@@ -16,7 +16,8 @@ const SearchInput = ({isDarkTheme} : ISearchInputProps) => {
 
     const searchResult = useRef('') ;
     const navigate = useNavigate() ;
-    const [textInput,setTextInput] = useState<string>('') ; 
+    const [textInput,setTextInput] = useState<string | string[]>('') ; 
+    const [openDialog , setOpenDialog ] = useState<boolean>(false) ;
 
     const { setLoadingVideos } = useContext(AppContext)
 
@@ -28,6 +29,20 @@ const SearchInput = ({isDarkTheme} : ISearchInputProps) => {
         e.target.nextElementSibling?.classList.add('focusInput') ;
     }
 
+    const handleCloseVoiceDialog = () => {
+      setOpenDialog(false) ;
+    }
+
+    const handleWhenVoiceStart = ( e : SpeechRecognitionEvent ) => {
+        searchResult.current = Array.from(e.results).map( result => result[0] ).map( result => result.transcript ).toString() ;
+        setTextInput(searchResult.current) ;
+      }
+      
+      const handleWhenVoiceEnd = ( ) => {
+       searchResult.current = '' ;
+       navigate(`/search/${searchResult.current}`) ;
+      }
+
     const handleSubmitSearch = (e:React.FormEvent<HTMLFormElement>) => {
       e.preventDefault() ;
       navigate(`/search/${textInput}`) ;
@@ -36,17 +51,6 @@ const SearchInput = ({isDarkTheme} : ISearchInputProps) => {
 
     const handleChangeValueInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTextInput(e.target.value) ;
-        const fetchSuggest = async () => {
-          try {
-            const data = 
-            await axios({             
-            }) ;
-            console.log(data)
-          } catch (error) {
-            console.log(error)
-          }
-        }
-        //fetchSuggest() ;
     }
 
     const handleRemoveText = () => {
@@ -54,19 +58,12 @@ const SearchInput = ({isDarkTheme} : ISearchInputProps) => {
     }
 
     const handleClickVoiceBtn = () => {
-
-      const SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
-      const recognition = new SpeechRecognition();
-      recognition.start() ;
-      recognition.interimResults  = true ;
-      recognition.addEventListener("result" , (e) => {
-        searchResult.current = e.results[0][0].transcript ;
-        console.log(searchResult.current) ;
-        setTextInput(searchResult.current) ;
-        navigate(`/search/${searchResult.current}`) ;
-      }) ;
-      // recognition.onaudioend = () => {
-      // }
+      setOpenDialog(true) ;
+      setTextInput('') ;
+      handleActiveSpeechRecogition(
+        handleWhenVoiceStart ,
+        handleWhenVoiceEnd ,
+      )
     }
  
   return (
@@ -133,6 +130,25 @@ const SearchInput = ({isDarkTheme} : ISearchInputProps) => {
      >
       <SearchIcon/>
      </div>
+     <Dialog
+     open={openDialog} 
+     onClose={handleCloseVoiceDialog}
+     sx={{
+      "	.MuiDialog-container" : {
+        alignItems : 'flex-start' ,
+      }
+     }}
+     >
+     <Box height={'400px'} width={'560px'} padding={'0 0 16px 32px'} borderRadius={'8px'}>
+        <Typography fontSize={'28px'} padding={'48px 0 24px'}>Đang nghe...</Typography>
+        <Typography height={'156px'} textOverflow={'ellipsis'} overflow={'hidden'}>{textInput}</Typography>
+        <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
+          <Avatar className='scale' sx={{width:'64px' , height : '64px' , backgroundColor : 'red'}} >
+            <KeyboardVoiceIcon sx={{height : '40px' , width : '40px'}}/>
+          </Avatar>
+        </Box>
+     </Box>
+     </Dialog>
     </form>
   )
 }

@@ -6,6 +6,7 @@ import { IVideos } from "../interface";
 import { videosFake } from "../constant/video"
 import { AppContext } from "../context/AppProvider";
 import CategoryNav from "./CategoryNav";
+import useIfiniteScroll from "../hooks/useIfiniteScroll";
 
 const Feed = () => {
 
@@ -19,15 +20,10 @@ const Feed = () => {
   ]);
   const [loadedVideoQuantity,setLoadedVideoQuantity] = useState<number>(16) ;
 
-  const handleLoadMoreData = () => {
-    const heightOfPage = document.documentElement.scrollHeight ;
-    const distanceFromTopWhenScroll = document.documentElement.scrollTop ;
-    const heightOfScreen = window.innerHeight ;
-    if ( heightOfScreen + distanceFromTopWhenScroll + 1 >= heightOfPage ) {
+  useIfiniteScroll( () => {
       setLoadedVideoQuantity( (prev) => prev + 8 ) ;
       setLoadingVideos(true) ;
-    }
-  }
+  } )
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,14 +47,10 @@ const Feed = () => {
       }
     };
     fetchData();
+    console.log("feedPage mounted") 
   }, [selectedCategory,loadedVideoQuantity]);
 
   console.log(videos) ;
-
-   useEffect( () => {
-    window.addEventListener("scroll",handleLoadMoreData)
-    return () => window.addEventListener("scroll",handleLoadMoreData)
-   } ,[])
 
   return (
     <> 

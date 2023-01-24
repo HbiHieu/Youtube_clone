@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import { Button , Avatar } from "@mui/material";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Avatar } from "@mui/material";
 
 import { AuthContext } from "../context/AuthProvider";
 import SignInButton from "./Button/SignInButton";
