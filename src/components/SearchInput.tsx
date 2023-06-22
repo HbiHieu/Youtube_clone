@@ -39,8 +39,11 @@ const SearchInput = ({isDarkTheme} : ISearchInputProps) => {
       }
       
       const handleWhenVoiceEnd = ( ) => {
-       searchResult.current = '' ;
-       navigate(`/search/${searchResult.current}`) ;
+       setTimeout( ()=> {
+         navigate(`/search/${searchResult.current}`) ;
+         setOpenDialog(false) ;
+         searchResult.current = '' ;
+       } , 2000 )
       }
 
     const handleSubmitSearch = (e:React.FormEvent<HTMLFormElement>) => {

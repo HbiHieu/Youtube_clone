@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { IVideos } from "../../interface";
 import { handleAddLikedVideo } from "./LikedVideo.ultil";
 
-interface initialState {
+export interface IinitialState {
   likedVideos: IVideos["videos"] ,
 } 
 
-const initialState : initialState = {
+const initialState : IinitialState = {
     likedVideos : [] ,
 } 
 

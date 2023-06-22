@@ -38,6 +38,7 @@ const SearchFeed = () => {
             numberMaxResults  :loadedVideoQuantity ,
           }
         );
+        console.log(data) ;
         setVideos(data.data.items);
         console.log(data.data.items);
         setLoadingVideos(false);

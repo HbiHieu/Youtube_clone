@@ -35,9 +35,9 @@ const Feed = () => {
           }
         );
         //setVideos( [...videos , data.data.items] ) ;
-        setVideos(data.data.items) ;
+        //setVideos(data.data.items) ;
         setGlobalVideo(data.data.items)
-        //setVideos( (prev) => [...prev , data.data.items] )
+        setVideos( (prev) => [...prev , ...data.data.items] )
         setLoadingVideos(false) ;
         console.log(data.data.items) 
       } catch (error) {
@@ -47,7 +47,6 @@ const Feed = () => {
       }
     };
     fetchData();
-    console.log("feedPage mounted") 
   }, [selectedCategory,loadedVideoQuantity]);
 
   console.log(videos) ;
@@ -59,7 +58,7 @@ const Feed = () => {
         videos={videos} 
         isSearchPage={false} 
         style={
-          {
+          { 
             widthCard : '100%' ,
             heightCard : '300px' ,
             isRow : false ,

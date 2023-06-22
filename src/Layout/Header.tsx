@@ -49,11 +49,11 @@ const Header = () => {
      <SearchInput
      isDarkTheme={darkTheme} 
      />
-     <Switch
+     {/* <Switch
      onChange={ () => {
       setDarkTheme( !darkTheme ) ;
      } }
-     />
+     /> */}
      <AvatarHeader/>
     </Stack>
     </>

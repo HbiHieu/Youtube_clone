@@ -12,11 +12,11 @@ import {
 
 export const sidebar = [
   { name: "Trang chủ", icon: <YoutubeHome /> , param : "/" },
-  { name: "Shorts", icon: <YoutubeShort /> , param : "/short" },
-  { name: "Kênh đăng ký", icon: <YoutubeSubscribe />, param: "/subscriptions" },
-  { name: "Thư viện", icon: <YoutubeLibrary />, param: "/library" },
-  { name: "Video đã xem", icon: <HistoryVideo />, param: "/history" },
-  { name: "Video của bạn", icon: <MyVideo />, param: "userVideo" },
+  { name: "Shorts", icon: <YoutubeShort /> , param : "/" },
+  { name: "Kênh đăng ký", icon: <YoutubeSubscribe />, param: "/" },
+  { name: "Thư viện", icon: <YoutubeLibrary />, param: "/" },
+  { name: "Video đã xem", icon: <HistoryVideo />, param: "/" },
+  { name: "Video của bạn", icon: <MyVideo />, param: "/" },
   { name: "Xem sau", icon: <ViewLater /> , param : "/" },
   { name: "Video đã thích", icon: <LikedVideo />, param: "likedVideos" },
   { name: "Thêm", icon: <MoreIcon /> , param : "/"},

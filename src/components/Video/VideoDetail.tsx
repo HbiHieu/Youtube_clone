@@ -22,7 +22,8 @@ import Videos from "./Videos";
 const VideoDetail = () => {
   const { setLoadingVideos , channelId , globalVideo } = useContext(AppContext);
   const [video, setVideo] = useState<IVideo>();
-  const [channelDetail] = useChannelDetail(channelId); 
+  const [channelDetail] = useChannelDetail(channelId || localStorage.getItem("channelId")! ); 
+  const [globalVideoLocal, setGlobalVideoLocal] = useState(globalVideo) ;
 
   const { id } = useParams();
 
@@ -39,8 +40,15 @@ const VideoDetail = () => {
         setLoadingVideos(false);
       };
       getVideoDetail();
+      if ( globalVideo && channelId ) {
+        localStorage.setItem("videos",JSON.stringify(globalVideo) );
+        localStorage.setItem("channelId",channelId) ;
+      }
+      else {
+        setGlobalVideoLocal( JSON.parse(localStorage.getItem("videos") || "") ) ;
+      }
     } catch (error) {}
-  }, []);
+  }, [channelId]);
 
 
   return (
@@ -91,7 +99,7 @@ const VideoDetail = () => {
           <SmallButton isSelected={false}>Video có liên quan</SmallButton>
         </Stack>
         <Videos
-        videos={globalVideo} 
+        videos={globalVideoLocal} 
         isSearchPage={true}
         style={
           {

@@ -33,7 +33,7 @@ const DescriptionVideo = ( {description , createAt , viewCount } : IDescriptionV
       height: isShowMore ? 'auto' : '104px' ,
       overflow:'hidden',
       position:'relative' ,
-      backgroundColor : darkTheme ? '#272727' : 'f2f2f2' ,
+      backgroundColor : darkTheme ? '#272727' : '#f2f2f2' ,
     }}
     >
       <div style={{fontWeight:'500'}}>

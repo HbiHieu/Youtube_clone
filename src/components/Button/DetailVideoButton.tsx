@@ -8,18 +8,17 @@ interface IpropsButton {
   handleClickBtn ?: (e?:any) => void ,
   isSearchPage ?: boolean ,
   style?: object ,
-  startIcon ?:JSX.Element
+  startIcon ?:JSX.Element ,
+  videoId ?: string | undefined,
 }
 
-const DetailVideoButton = ({ children , handleClickBtn , isSearchPage , style , startIcon }: IpropsButton) => {
-  
-  const { darkTheme } = useContext(AppContext) ;
+const DetailVideoButton = ({ children , videoId , handleClickBtn , isSearchPage , style , startIcon }: IpropsButton) => {
 
   return (
     <Button
       sx={{
-        backgroundColor : darkTheme ? '#282727' : '#f2f2f2' ,
-        color : darkTheme ? 'white' : 'black' ,
+        backgroundColor : false ? '#282727' : '#f2f2f2' ,
+        color : false ? 'white' : 'black' ,
         textTransform: "initial", 
         fontSize: "14px",
         borderRadius: "20px",
@@ -29,7 +28,7 @@ const DetailVideoButton = ({ children , handleClickBtn , isSearchPage , style , 
         marginTop : isSearchPage ? '30px' : '' ,
         padding:'0 16px',
         '&.MuiButton-root:hover' : {
-        backgroundColor : darkTheme ? '#413f3e' : '#e5e5e5' ,
+        backgroundColor : false ? '#413f3e' : '#e5e5e5' ,
       },
       ...style ,
       }}

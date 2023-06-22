@@ -1,6 +1,7 @@
 import React ,{ useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider'
+import { handleClickSignInWithGoogle } from '../firebase';
 
 const useCheckUser = () => {
   
@@ -9,7 +10,7 @@ const useCheckUser = () => {
 
   const handleRedirectUser = () => {
     if ( !user ) {
-       navigate('/signIn') ;
+       handleClickSignInWithGoogle()
     }
   }
 

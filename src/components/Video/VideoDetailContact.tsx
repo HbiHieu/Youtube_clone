@@ -25,7 +25,25 @@ const VideoDetailContact = ( { channelTitle , subscriberCount , likeCount , urlI
   const handleLikeVideo = () => {
     dispatch( 
       likedVideosSlice.actions.addLikedVideos(video) 
-     )
+     );
+     const LikedVideoId = video!.id ;
+     const listLikedId = localStorage.getItem("liked");
+     if ( listLikedId ) {
+      const list = JSON.parse( listLikedId ) ;
+      if ( list.findIndex( (id:any) => id == LikedVideoId ) == -1 ) {
+         list.push(LikedVideoId) ;
+         localStorage.setItem("liked",JSON.stringify(list)) ;
+      }
+      else {
+        const newList = list.filter( (id:any) => id != LikedVideoId  ) ;
+        localStorage.setItem("liked",JSON.stringify(newList)) ;
+      }
+     }
+     else {
+      const list = [] ;
+      list.push(LikedVideoId) ;
+      localStorage.setItem("liked",JSON.stringify(list)) ;
+     }
   }
 
   return (
@@ -86,6 +104,7 @@ const VideoDetailContact = ( { channelTitle , subscriberCount , likeCount , urlI
                     width: "1px",
                   },
                 }}
+                videoId={`${video?.id}`}
                 handleClickBtn={handleLikeVideo}
                 startIcon={<LikeIcon />}
               >

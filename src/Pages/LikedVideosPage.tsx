@@ -7,6 +7,8 @@ const LikedVideosPage = () => {
   
   const likedVideo = useSelector( selectorLikedVideo ) ;
 
+  console.log(likedVideo);
+
   return (
     <Videos
           videos={likedVideo}

@@ -19,6 +19,7 @@ const AuthProvider = ({children}:IAppContextChildren) => {
     useEffect( () => {
         const checkUser = onAuthStateChanged(auth, (user) => {
             if (user) {
+              console.log(user) ;
               setUser({
                displayName:user.displayName || '' ,
                email:user.email || '',

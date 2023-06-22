@@ -40,7 +40,7 @@ const VideoCard = ({ item, style }: VideoProps) => {
 
   return (
     <Link 
-     to={`/video/${item.id.videoId}`}
+     to={`/video/${item.id.videoId || item.id}`}
      onClick={ () => { 
       setLoadingVideos(true) ;
       setChannelId(item.snippet.channelId) ;

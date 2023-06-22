@@ -11,7 +11,7 @@ const LibraryPage = () => {
     return (
       <>
       {
-          haveUser ? <div>Library</div> : 
+          haveUser ? <div></div> : 
           <RequireLogin
            icon={<YoutubeLibrary width='120px' height='120px'/>}
            title={'Thưởng thức các video yêu thích của bạn'}
