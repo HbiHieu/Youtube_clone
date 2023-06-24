@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux/es/hooks/useSelector';
-import { Videos } from '../components';
+import { Feed, Videos } from '../components';
 import { HistoryVideo } from '../components/icons';
 import RequireLogin from '../components/RequireLogin';
 import useCheckUser from '../hooks/useCheckUser'
@@ -19,7 +19,7 @@ const HistoryPage = () => {
       <>
       {
           haveUser ? 
-          <div>video</div> : 
+          <Feed/> : 
           <RequireLogin
            icon={<HistoryVideo width='120px' height='120px'/>}
            title={'Theo dõi nội dung mà bạn xem'}

@@ -2,6 +2,7 @@ import React from 'react'
 import { YoutubeLibrary } from '../components/icons';
 import RequireLogin from '../components/RequireLogin';
 import useCheckUser from '../hooks/useCheckUser'
+import { Feed } from '../components';
 
 const LibraryPage = () => {
     const { isUserLogin } = useCheckUser() ;
@@ -11,7 +12,7 @@ const LibraryPage = () => {
     return (
       <>
       {
-          haveUser ? <div></div> : 
+          haveUser ? <Feed/> : 
           <RequireLogin
            icon={<YoutubeLibrary width='120px' height='120px'/>}
            title={'Thưởng thức các video yêu thích của bạn'}
