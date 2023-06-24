@@ -37,6 +37,30 @@ const Feed = () => {
         //setVideos( [...videos , data.data.items] ) ;
         //setVideos(data.data.items) ;
         setGlobalVideo(data.data.items)
+        setVideos(data.data.items) ;
+        setLoadingVideos(false) ;
+        console.log(data.data.items) 
+      } catch (error) {
+        setVideos(videosFake);
+        setLoadingVideos(false) ;
+        console.log(error)
+      }
+    };
+    fetchData();
+  }, [selectedCategory]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchDataFromAPI(
+          {
+            url : `search?part=snippet&q=${selectedCategory}`,
+            numberMaxResults  :loadedVideoQuantity ,
+          }
+        );
+        //setVideos( [...videos , data.data.items] ) ;
+        //setVideos(data.data.items) ;
+        setGlobalVideo(data.data.items)
         setVideos( (prev) => [...prev , ...data.data.items] )
         setLoadingVideos(false) ;
         console.log(data.data.items) 
@@ -47,7 +71,7 @@ const Feed = () => {
       }
     };
     fetchData();
-  }, [selectedCategory,loadedVideoQuantity]);
+  }, [loadedVideoQuantity]);
 
   console.log(videos) ;
 

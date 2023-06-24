@@ -51,8 +51,8 @@ const Videos = ({videos , style , isSearchPage } :IVideosProps) => {
             <VideoCard 
             style={style}
             item = {item} /> }
-            {item.id.channelId && 
-            <ChannelCard isSearchPage={isSearchPage} item = {item} /> } 
+            {item.id.channelId && isSearchPage ? 
+            <ChannelCard isSearchPage={isSearchPage} item = {item} /> : null} 
             </Grid> 
         ) )
      }
